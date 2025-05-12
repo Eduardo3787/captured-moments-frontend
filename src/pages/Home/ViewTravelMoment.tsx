@@ -1,31 +1,31 @@
-import { GrMapLocation } from "react-icons/gr";
-import { MdClose, MdDelete, MdUpdate } from "react-icons/md";
-import { formatDate } from "../../ultils/helpers";
+import { GrMapLocation } from "react-icons/gr"
+import { MdClose, MdDelete, MdUpdate } from "react-icons/md"
+import { formatDate } from "../../ultils/helpers"
 
 interface MomentsProps {
-  id: string;
-  imageUrl: string;
-  isFavorite: boolean;
-  story: string;
-  title: string;
-  userId: string;
-  visitedDate: string;
-  visitedLocation: string[];
+  id: string
+  imageUrl: string
+  isFavorite: boolean
+  story: string
+  title: string
+  userId: string
+  visitedDate: string
+  visitedLocation: string[]
 }
 
 interface ViewTravelMomentProps {
-  momentInfo: MomentsProps | null;
-  onClose: () => void;
-  onDeleteClick: () => void;
-  onEditClick: () => void;
+  momentInfo: MomentsProps | null
+  onClose: () => void
+  onDeleteClick: () => void
+  onEditClick: () => void
 }
 
-export const ViewTravelMoment = ({
-  momentInfo,
-  onClose,
-  onDeleteClick,
-  onEditClick,
-}: ViewTravelMomentProps) => {
+export const ViewTravelMoment = ({ 
+    momentInfo,
+    onClose,
+    onDeleteClick,
+    onEditClick 
+  }: ViewTravelMomentProps) => {
   return (
     <section className="relative">
       <header className="flex items-center justify-end">
@@ -39,32 +39,38 @@ export const ViewTravelMoment = ({
           </button>
 
           <button onClick={onClose}>
-            {/* Alterado "text-sl" para "text-sm" para um tamanho padrão */}
-            <MdClose className="text-sm text-slate-400" />
+            <MdClose className="text-sl text-slate-400" />
           </button>
         </div>
       </header>
 
       <div>
         <article className="flex-1 flex flex-col gap-2 py-4">
-          <h1 className="text-2xl text-slate-950">{momentInfo?.title}</h1>
+          <h1 className="text-2xl text-slate-950">
+            {momentInfo && momentInfo.title}
+          </h1>
+
           <div className="flex items-center justify-between gap-3">
             <span className="text-xs text-slate-500">
-              {formatDate(momentInfo?.visitedDate || "")}
+              {formatDate(momentInfo?.visitedDate || '')}
             </span>
+
             <div className="inline-flex items-center gap-2 text-[13px] text-violet-600 bg-violet-200/40 rounded px-2 py-1">
               <GrMapLocation className="text-sm" />
-              {momentInfo &&
-                momentInfo.visitedLocation.map((visited, idx) =>
-                  momentInfo.visitedLocation.length === idx + 1 ? `${visited}` : `${visited}, `
-                )}
+              { momentInfo &&  
+                momentInfo.visitedLocation.map((visited, idx) => 
+                  momentInfo.visitedLocation.length == idx + 1
+                    ? `${visited}`
+                    : `${visited}, `
+                  )
+              }
             </div>
           </div>
         </article>
 
-        <img
-          src={momentInfo?.imageUrl}
-          alt="Travel moment"
+        <img 
+          src={momentInfo?.imageUrl} 
+          alt="" 
           className="w-full h-[300px] object-cover rounded-lg"
         />
 
@@ -75,5 +81,5 @@ export const ViewTravelMoment = ({
         </footer>
       </div>
     </section>
-  );
-};
+  )
+}
